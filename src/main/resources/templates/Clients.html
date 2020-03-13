@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div>
+			<h1 class="title">Liste des Clients :</h1>
+			<div class="mx-sm-1 p-3 text-center" style="width: 90%;">
+				<div class="text-info pull-left text-center mt-2" style="margin: 10px 0px 20px 5%">
+			    	<a th:href="@{/client/newClientForm}"><button class="btn btn-info">Nouveau client</button></a>
+			    </div>
+				<table class="table table-striped" style="margin-left: 5%;">
+					  <thead class="thead-light">
+					    <tr>
+					      <th scope="col">CIN</th>
+					      <th scope="col">Nom</th>
+					      <th scope="col">Prénom</th>
+					      <th scope="col">Addresse</th>
+					      <th scope="col">Téléphone</th>
+					      <th scope="col">NB véhicule</th>
+					      <th></th>
+					      <th></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<tr th:each="client : ${clients}">
+					  		<td th:text="${client.cin}"></td>
+					  		<td th:text="${client.lastName}"></td>
+					  		<td th:text="${client.firstName}"></td>
+					  		<td th:text="${client.address}"></td>
+					  		<td th:text="${client.phone}"></td>
+					  		<td th:text="${client.vehicules.size()}"></td>
+					  		<td>
+						  		<a th:href="@{/client/editClientForm/{id}(id=${client.id})}">
+						  			<i class="fa fa-pencil" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  		<td>
+						  		<a th:href="@{/client/deleteClient/{id}(id=${client.id})}">
+						  			<i class="fa fa-trash" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  	</tr>
+					  </tbody>
+				 </table>
+			</div>
+		</div>
+	</body>
+</html>

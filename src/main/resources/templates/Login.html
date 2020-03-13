@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	</head>
+	<body>
+		<!-- Default form login -->
+		<div class="container border spacing">
+			<form class="text-center border border-light p-5" th:action="@{/user/login}" method="post">
+			    <p class="h4 mb-4">Sign in</p>
+			    <!-- Email -->
+			    <input type="text" id="userName" name="userName" class="form-control mb-4" placeholder="User Name">
+			    <!-- Password -->
+			    <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
+			    <!-- Sign in button -->
+			    <button class="btn btn-info" type="submit">Sign in</button>
+				<div th:if="${message}" class="alert alert-danger" role="alert" style="margin-top: 10px;">
+					<p th:text="${message}"></p>
+				</div>
+			</form>
+		</div>
+		<!-- Default form login -->
+	</body>
+</html>

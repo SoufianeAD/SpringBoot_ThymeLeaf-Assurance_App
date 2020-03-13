@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div>
+			<h3 class="title" th:text="${'Liste des accidents : ' + client.cin + '-' + client.lastName
+			 + ' ' + client.firstName + '/' + vehicule.marque + '-' + vehicule.model + '-' + vehicule.immatriculation} "></h3>
+			<div class="mx-sm-1 p-3 text-center" style="width: 90%;">
+				<div class="text-info pull-left text-center mt-2" style="margin: 10px 0px 20px 5%">
+			    	<a th:href="@{/accident/newAccidentForm}"><button class="btn btn-info">Nouveau accident</button></a>
+			    </div>
+				<table class="table table-striped" style="margin-left: 5%;">
+					  <thead class="thead-light">
+					    <tr>
+					      <th scope="col">Date</th>
+					      <th scope="col">Description</th>
+					      <th scope="col">Remboursement</th>
+					      <th></th>
+					      <th></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<tr th:each="accident : ${accidents}">
+					  		<td th:text="${accident.date}"></td>
+					  		<td th:text="${accident.description}"></td>
+					  		<td th:if="${accident.remboursement == null}" style="color: red;">Pas de remboursement</td>
+					  		<td th:if="${accident.remboursement != null}" th:text="${accident.remboursement.value + ' DH - le: ' + accident.remboursement.date }" style="color: blue;"></td>
+					  		<td>
+						  		<a th:if="${accident.remboursement == null}" th:href="@{/remboursement/newRemboursementForm/{id}(id=${accident.id})}">
+						  			<i class="fa fa-pencil" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  		<td>
+						  		<a th:href="@{/accident/deleteAccident/{id}(id=${accident.id})}">
+						  			<i class="fa fa-trash" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  	</tr>
+					  </tbody>
+				 </table>
+			</div>
+		</div>
+	</body>
+</html>

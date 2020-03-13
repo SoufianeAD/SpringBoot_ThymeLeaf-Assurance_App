@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div>
+			<h1 class="title"th:text="${'Liste des véhicules : ' + client.cin + '-' + client.lastName + ' ' + client.firstName} "></h1>
+			<div class="mx-sm-1 p-3 text-center" style="width: 90%;">
+				<div class="text-info pull-left text-center mt-2" style="margin: 10px 0px 20px 5%">
+			    	<a th:href="@{/vehicule/newVehiculeForm}"><button class="btn btn-info">Nouveau véhicule</button></a>
+			    </div>
+				<table class="table table-striped" style="margin-left: 5%;">
+					  <thead class="thead-light">
+					    <tr>
+					      <th scope="col">Immatriculation</th>
+					      <th scope="col">Marque</th>
+					      <th scope="col">Model</th>
+					      <th scope="col">Prix</th>
+					      <th scope="col">NB accidents</th>
+					      <th></th>
+					      <th></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<tr th:each="vehicule : ${vehicules}">
+					  		<td th:text="${vehicule.immatriculation}"></td>
+					  		<td th:text="${vehicule.marque}"></td>
+					  		<td th:text="${vehicule.model}"></td>
+					  		<td th:text="${vehicule.prix}"></td>
+					  		<td th:text="${vehicule.accidents.size()}"></td>
+					  		<td>
+						  		<a th:href="@{/vehicule/editVehiculeForm/{id}(id=${vehicule.id})}">
+						  			<i class="fa fa-pencil" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  		<td>
+						  		<a th:href="@{/vehicule/deleteVehicule/{id}(id=${vehicule.id})}">
+						  			<i class="fa fa-trash" aria-hidden="true" style="font-size: 24px;"></i>
+						  		</a>
+					  		</td>
+					  	</tr>
+					  </tbody>
+				 </table>
+			</div>
+		</div>
+	</body>
+</html>

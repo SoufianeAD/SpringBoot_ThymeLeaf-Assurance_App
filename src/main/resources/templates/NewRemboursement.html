@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div class="container border spacing" style="margin-top: 20px;">
+			<form class="text-center border border-light p-5" th:object="${remboursement}" th:action="@{/remboursement/newRemboursement}" method="post">
+			    <p class="h4 mb-4">Remboursement</p>
+			    <div class="md-form">
+			    	<input type="date" class="form-control mb-3" name="remboursementDate"/>
+			    </div>
+			    <input type="text" id="value" name=value class="form-control mb-4" placeholder="Valeur du remboursement" th:field="*{value}">
+			    <button class="btn btn-info" type="submit">Valider</button>
+			    <div class="text-success text-center mt-2">
+			    	<a th:href="@{/accident/clients}">Retour à la liste des accidents</a>
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>

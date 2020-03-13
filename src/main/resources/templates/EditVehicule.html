@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div class="container border spacing" style="margin-top: 20px; width: 50%;">
+			<h2 class="title text-center" th:text="${client.cin + '-' + client.lastName + ' ' + client.firstName} "></h2>
+			<form class="text-center border border-light p-5" th:action="@{/vehicule/editVehicule}" th:object="${vehicule}" method="post">
+			    <p class="h4 mb-4">Modifier véhicule</p>
+			    <input type="text" id="marque" name="marque" class="form-control mb-4" placeholder="Marque" th:field="*{marque}">
+			    <input type="text" id="model" name="model" class="form-control mb-4" placeholder="Model" th:field="*{model}">
+			    <input type="text" id="immatriculation" name="immatriculation" class="form-control mb-4" placeholder="Immatriculation" th:field="*{immatriculation}">
+			    <input type="text" id="prix" name="prix" class="form-control mb-4" placeholder="Prix" th:field="*{prix}">
+			    <!-- button -->
+			    <button class="btn btn-info" type="submit">Valider</button>
+			    <div class="text-success text-center mt-2">
+			    	<a th:href="@{/accident/vehiculeAccidents/{id}(id=${vehicule.id})}" style="margin-right: 15px;">Voir ses accidents</a>
+			    	<a th:href="@{/vehicule/clientVehicules/{id}(id=${client.id})}">Retour à la liste des voitures</a>
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>

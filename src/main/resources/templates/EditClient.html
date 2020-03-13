@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div class="container border spacing" style="margin-top: 20px;">
+			<form class="text-center border border-light p-5" th:object="${client}" th:action="@{/client/editClient/{id}(id=${client.id})}" method="post">
+			    <p class="h4 mb-4">Modifier client</p>
+			    <input type="text" id="cin" name="cin" class="form-control mb-4" placeholder="CIN" th:field="*{cin}">
+			    <input type="text" id="lastName" name="lastName" class="form-control mb-4" placeholder="Nom" th:field="*{lastName}">
+			    <input type="text" id="firstName" name="firstName" class="form-control mb-4" placeholder="Prénom" th:field="*{firstName}">
+			    <input type="text" id="address" name="address" class="form-control mb-4" placeholder="address" th:field="*{address}">
+			    <input type="text" id="phone" name="phone" class="form-control mb-4" placeholder="phone" th:field="*{phone}">
+			    <button class="btn btn-info" type="submit">Valider</button>
+			    <div class="text-success text-center mt-2">
+			    	<a th:href="@{/vehicule/clientVehicules/{id}(id=${client.id})}" style="margin-right: 15px;">Voir ses véhicules</a>
+			    	<a th:href="@{/client/clients}">Retour à la liste des clients</a>
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>

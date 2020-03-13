@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/style01.css}" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+		<header th:insert="fragments/Top-nav :: header"></header>
+		<div class="container border spacing" style="margin-top: 20px; width: 50%;">
+			<h2 class="title text-center" th:text="${client.cin + '-' + client.lastName + ' ' + client.firstName } "></h2>
+			<h3 class="title text-center" th:text="${vehicule.marque + '-' + vehicule.model + '-' + vehicule.immatriculation}" ></h3>
+			<form class="text-center  border-top border-dark p-5" th:action="@{/accident/newAccident}" th:object="${accident}" method="post">
+			    <p class="h4 mb-4">Nouveau accident</p>
+			    <div class="md-form">
+			    	<input type="date" class="form-control mb-3" name="accidentDate"/>
+			    </div>
+			    <div class="md-form">
+				  <textarea id="model" class="md-textarea form-control" rows="3" th:field="*{description}" placeholder="Description"></textarea>
+				</div>
+			    <!-- button -->
+			    <button class="btn btn-info mt-3" type="submit">Valider</button>
+			    <div class="text-success text-center mt-2">
+			    	<a th:href="@{/accident/vehiculeAccidents/{id}(id=${vehicule.id})}">Retour à la liste des accidents</a>
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>
